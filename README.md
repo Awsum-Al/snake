@@ -1,7 +1,7 @@
-This tutorial will help you get started as a **frontend** dev in **oneChat**.
+This tutorial will help you get started as a **frontend** dev for ShOC.
 
 **Help!**
-* If you get confused start by using your googling skills! We are happy to answer your questions but debugging is also a very important part of development. Ask for help when you're out of options or you don't know where to start looking. If there is no one around to help you, you can check out the other dev's branches of the tutorial.
+* If you get confused start by using your googling skills! We are happy to answer your questions but debugging is also a very important part of development. Ask for help when you're out of options or you don't know where to start looking. 
 
 **Know the Tech Stack:**
 *  Package Management Tool: Yarn 
@@ -22,13 +22,9 @@ This tutorial will help you get started as a **frontend** dev in **oneChat**.
 Part 1: Getting Started! We're going to make snake! (look it up if you don't know the game!)
 
 *After each step, check in with a developer before you start on the next checklist item*  
-1. Clone tolkien/tutorial and create a new branch with your name as the name of the branch. Then, change the text in the tutorial app to "Hello World" and start up the frontend by typing `yarn start` in iTerm (or the command line of choice). Make a commit to your new branch and then push!
-Make sure you're pushing a new commit for each step of this tutorial. 
+1. Clone the tutorial down to your computer. Then, change the text in the tutorial app to "Hello World" and start up the frontend by typing `yarn start` in iTerm (or the command line of choice). (You might need to run yarn install to update dependencies) 
 >Relevant Material: 
-* To clone, you'll first need an access token. You can get one by clicking on your profile in the top right and going to settings -> Access tokens. 
-* Then you can type this into your terminal to clone: `git clone https://oauth2:<token>@gitlab.shoc.us/tolkien/tutorial.git` 
 >* [No Shit Git](https://rogerdudler.github.io/git-guide/)
->* [Rules of a good commit message](https://chris.beams.io/posts/git-commit/)
 
 2. Next, create the Board using **ES6 arrow functions**: 
 * "Board" in a board.tsx
@@ -158,7 +154,7 @@ setSnakeVelocity({xv: 0, yv: 0})
 setTick(0)`
 
 
-YOU MADE IT. We're so proud 
+YOU MADE IT. Wipe the sweat off your brow and give yourself a pat on the back
 
 
   
