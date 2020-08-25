@@ -32,7 +32,7 @@ const Board/*: React.FC*/ = () => {
     const restartButton = () => [(setRestart(true), setsnakeHead({row: 5, col: 10}), settailArray([{row: 5, col: 9}, {row: 5, col: 8}, {row: 5, col: 7}]), setLost(false), setsnakeVelocity({vx: 0, vy: 0}), setTick(0))]
     
     // eslint-disable-next-line
-    React.useEffect(() => { initGrid(); placeFood(); const timer = window.setInterval(() => { setTick(prevState => prevState + 1); }, 800); document.addEventListener('keydown', onKeyDown); return () => { document.removeEventListener('keydown', onKeyDown); window.clearInterval(timer); } }, [restart])
+    React.useEffect(() => { initGrid(); placeFood(); const timer = window.setInterval(() => { setTick(prevState => prevState + 1); }, 1000); document.addEventListener('keydown', onKeyDown); return () => { document.removeEventListener('keydown', onKeyDown); window.clearInterval(timer); } }, [restart])
     // eslint-disable-next-line
     React.useEffect(() => { moveSnakeHead(); movebody(); gameLogic();}, [tick])
 
@@ -95,9 +95,9 @@ const Board/*: React.FC*/ = () => {
         else if (snakeHead.row >= 0 && snakeHead.row < 50 && snakeHead.col >= 0 && snakeHead.col < 50) {
             tempClass = 'cell'
         }
-        else {
-            tempClass = 'null'
-        }
+        //else {
+        //    tempClass = 'null'
+        //}
         return tempClass
     }
 
@@ -118,13 +118,15 @@ const Board/*: React.FC*/ = () => {
             setsnakeVelocity({ vx: 0, vy: 1 })
         }
     }, []);
+	
+	const nextsnakeHead = {row: snakeHead.row + snakeVelocity.vy, col: snakeHead.col + snakeVelocity.vx}	
 
     const moveSnakeHead = () => {
         if (pause) { setsnakeVelocity({ vx: 0, vy: 0 }) }
         if (snakeVelocity.vx !== 0 || snakeVelocity.vy !== 0) {
-            let x = snakeHead.row + snakeVelocity.vy
-            let y = snakeHead.col + snakeVelocity.vx
-            setsnakeHead({ row: x, col: y })
+//            let x = snakeHead.row + snakeVelocity.vy
+//            let y = snakeHead.col + snakeVelocity.vx
+            setsnakeHead(nextsnakeHead)
         }
     }
     const movebody = () => {
@@ -137,19 +139,19 @@ const Board/*: React.FC*/ = () => {
         }
     }
     const gameLogic = () => {
-        let x = snakeHead.row
-        let y = snakeHead.col
+        let x = nextsnakeHead.row
+        let y = nextsnakeHead.col
         let temptail = tailArray.map(z => Object.assign({}, z));
         // The shift removes the first tail section. This avoids collision detections while going in a straight line.
-        temptail.shift()
+        // temptail.shift()
         let tailFound = temptail.find((tail) => { return (x === tail.row && y === tail.col) })
         // #1 Food
-        if (snakeHead.row === food.row && snakeHead.col === food.col) {
+        if (nextsnakeHead.row === food.row && nextsnakeHead.col === food.col) {
             settailArray(prevState => ([...prevState, { col: -1, row: -1 }]))
             placeFood()
         }
         // #2 The Wall
-        else if (snakeHead.row < 0 || snakeHead.row > 50 || snakeHead.col < 0 || snakeHead.col > 50) {
+        else if (nextsnakeHead.row < 0 || nextsnakeHead.row > 50 || nextsnakeHead.col < 0 || nextsnakeHead.col > 50) {
             console.log('You hit the wall')
             setLost(true)
         }
@@ -160,8 +162,8 @@ const Board/*: React.FC*/ = () => {
         }
     }
 
-    var snake_grid = (
-        <body>
+    let snake_grid = (
+
             <div>
                 <div className='board-background'>
                     {grid && drawGrid()}
@@ -176,11 +178,11 @@ const Board/*: React.FC*/ = () => {
                     Quit
                 </button>
             </div>
-        </body>
+
     );
 
-    var game_over = (
-        <body>
+    let game_over = (
+
 
             <div id="GO">
 
@@ -197,11 +199,11 @@ const Board/*: React.FC*/ = () => {
                 </div>
 
             </div>
-        </body>
+
 
     )
 
-    var ternary = lost ? game_over : snake_grid;
+    let ternary = lost ? game_over : snake_grid;
 
     return ternary;
 
